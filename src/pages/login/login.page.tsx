@@ -72,6 +72,7 @@ const LoginPage = () => {
               hasError={!!errors?.password}
               placeholder="Digite sua senha"
               {...register('password', { required: true })}
+              type="password"
             />
 
             {errors?.password?.type === 'required' && (
