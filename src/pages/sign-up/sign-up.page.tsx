@@ -7,6 +7,8 @@ import {
   AuthErrorCodes
 } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
+import { useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // Components
 import CustomButton from '../../components/custom-button/custum-buttom.component'
@@ -24,6 +26,7 @@ import {
 
 // Utilities
 import { auth, db } from '../../config/firebase.config'
+import { UserContext } from '../../contexts/user.context'
 
 interface SignUpForm {
   fistName: string
@@ -41,6 +44,15 @@ const SignUpPage = () => {
     setError,
     handleSubmit
   } = useForm<SignUpForm>()
+
+  const { isAuthenticated } = useContext(UserContext)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated])
 
   const watchPassword = watch('password')
 
