@@ -11,7 +11,9 @@ root.render(
   <React.StrictMode>
     <UserContextProvider>
       <CategoryContextProvider>
-        <App />
+        <CategoryContextProvider>
+          <App />
+        </CategoryContextProvider>
       </CategoryContextProvider>
     </UserContextProvider>
   </React.StrictMode>
