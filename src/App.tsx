@@ -16,6 +16,7 @@ import { UserContext } from './contexts/user.context'
 
 // Components
 import Loading from './components/loading/loading.component'
+import Cart from './components/cart/cart.component'
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true)
@@ -55,6 +56,8 @@ const App: FunctionComponent = () => {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/category/:id" element={<CategoryDetailsPage />} />
       </Routes>
+
+      <Cart />
     </BrowserRouter>
   )
 }
