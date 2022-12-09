@@ -3,6 +3,7 @@ import { BsCartCheck } from 'react-icons/bs'
 
 // Utilities
 import { CartContext } from '../../contexts/cart.context'
+import CartItem from '../cart-item/cart-item.component'
 
 // Components
 import CustomButton from '../custom-button/custum-buttom.component'
@@ -17,7 +18,7 @@ import {
 } from './cart.styles'
 
 const Cart: FunctionComponent = () => {
-  const { isVisible, toggleCart } = useContext(CartContext)
+  const { isVisible, products, toggleCart } = useContext(CartContext)
 
   return (
     <CartContainer isVisible={isVisible}>
@@ -25,7 +26,9 @@ const Cart: FunctionComponent = () => {
       <CartContent>
         <CartTitle>Seu Carrinho</CartTitle>
 
-        {/* produutos */}
+        {products.map((product) => (
+          <CartItem key={product.id} product={product} />
+        ))}
 
         <CartTotal>Total: R$999,99</CartTotal>
 
