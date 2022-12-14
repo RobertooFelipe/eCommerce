@@ -40,16 +40,14 @@ const CartContextProvider: FunctionComponent<IChildrenProps> = ({
   children
 }) => {
   const [isVisible, setIsVisible] = useState(false)
-  const [products, setProducts] = useState<CartProduct[]>([])
-
-  useEffect(() => {
+  const [products, setProducts] = useState<CartProduct[]>(() => {
     const productsFromLocalStorage = JSON.parse(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       localStorage.getItem('cartProducts')!
     )
 
-    setProducts(productsFromLocalStorage)
-  }, [])
+    return productsFromLocalStorage
+  })
 
   useEffect(() => {
     localStorage.setItem('cartProducts', JSON.stringify(products))
