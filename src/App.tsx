@@ -16,6 +16,7 @@ import { auth, db } from './config/firebase.config'
 import { UserContext } from './contexts/user.context'
 
 // Components
+import AuthtenticationGuard from './guards/authtentication.guard'
 import Loading from './components/loading/loading.component'
 import Cart from './components/cart/cart.component'
 
@@ -55,7 +56,14 @@ const App: FunctionComponent = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <AuthtenticationGuard>
+              <CheckoutPage />
+            </AuthtenticationGuard>
+          }
+        />
         <Route path="/category/:id" element={<CategoryDetailsPage />} />
       </Routes>
 
