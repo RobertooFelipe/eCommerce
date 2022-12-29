@@ -1,9 +1,11 @@
-import { FunctionComponent, useContext } from 'react'
+import axios from 'axios'
+import { FunctionComponent, useContext, useState } from 'react'
 import { BsBagCheck } from 'react-icons/bs'
 
 import { CartContext } from '../../contexts/cart.context'
 import CartItem from '../cart-item/cart-item.component'
 import CustomButton from '../custom-button/custum-buttom.component'
+import Loading from '../loading/loading.component'
 
 import {
   CheckoutContainer,
@@ -14,8 +16,29 @@ import {
 
 const Checkout: FunctionComponent = () => {
   const { products, productsTotalPrice } = useContext(CartContext)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleFinishPurchaseClick = async () => {
+    try {
+      setIsLoading(true)
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_URL!}/create-checkout-session`,
+        {
+          products
+        }
+      )
+
+      window.location.href = data.url
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <CheckoutContainer>
+      {isLoading && <Loading />}
       <CheckoutTitle>Checkout</CheckoutTitle>
 
       {products.length > 0 ? (
@@ -28,7 +51,9 @@ const Checkout: FunctionComponent = () => {
 
           <CheckoutTotal>Total: R${productsTotalPrice}</CheckoutTotal>
 
-          <CustomButton startIcon={<BsBagCheck />}>
+          <CustomButton
+            startIcon={<BsBagCheck />}
+            onClick={handleFinishPurchaseClick}>
             Finalizar Compra
           </CustomButton>
         </>
