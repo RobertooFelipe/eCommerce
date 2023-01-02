@@ -9,8 +9,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup
 } from 'firebase/auth'
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // Components
 import CustomInput from '../../components/custom-input/custom-input.component'
@@ -30,7 +31,6 @@ import {
 
 // Utilities
 import { auth, db, googleProvider } from '../../config/firebase.config'
-import { UserContext } from '../../contexts/user.context'
 
 interface LoginForm {
   email: string
@@ -47,7 +47,10 @@ const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
+
   const navigate = useNavigate()
   useEffect(() => {
     if (isAuthenticated) {

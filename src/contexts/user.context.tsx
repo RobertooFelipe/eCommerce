@@ -1,6 +1,6 @@
 import { createContext, FunctionComponent, useState } from 'react'
 
-import User from '../types/user.tyes'
+import User from '../types/user.types'
 
 interface IUserContext {
   currentUser: User | null

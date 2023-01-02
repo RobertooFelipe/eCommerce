@@ -1,12 +1,12 @@
 import { signOut } from 'firebase/auth'
 import { useContext } from 'react'
 import { BsCart3 } from 'react-icons/bs'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Utilities
-import { auth } from '../../config/firebase.config'
 import { CartContext } from '../../contexts/cart.context'
-import { UserContext } from '../../contexts/user.context'
+import { auth } from '../../config/firebase.config'
 
 // Styles
 import {
@@ -19,7 +19,11 @@ import {
 const Header = () => {
   const navigate = useNavigate()
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
+  const dispatch = useDispatch()
+
   const { toggleCart, productsCount } = useContext(CartContext)
 
   const handleLoginClick = () => {
@@ -32,6 +36,11 @@ const Header = () => {
 
   const handleExploreClick = () => {
     navigate('/explore')
+  }
+
+  const handleSignOutClick = () => {
+    dispatch({ type: 'LOGOUT_USER' })
+    signOut(auth)
   }
 
   return (
@@ -48,7 +57,7 @@ const Header = () => {
         )}
         {isAuthenticated && (
           <>
-            <HeaderItem onClick={() => signOut(auth)}>Sair</HeaderItem>
+            <HeaderItem onClick={handleSignOutClick}>Sair</HeaderItem>
           </>
         )}
         <HeaderItem onClick={toggleCart}>
