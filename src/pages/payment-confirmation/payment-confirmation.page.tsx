@@ -1,5 +1,6 @@
-import { FunctionComponent, useContext, useEffect } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 // Components
 import CustomButton from '../../components/custom-button/custum-buttom.component'
@@ -18,10 +19,11 @@ import {
 
 // Utilities
 import Colors from '../../theme/theme.colors'
-import { CartContext } from '../../contexts/cart.context'
+import { clearProducts } from '../../store/reducers/cart/cart.actions'
 
 const PaymentConfirmationPage: FunctionComponent = () => {
-  const { clearProducts } = useContext(CartContext)
+  const dispatch = useDispatch()
+
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
@@ -30,7 +32,7 @@ const PaymentConfirmationPage: FunctionComponent = () => {
 
   useEffect(() => {
     if (status === 'true') {
-      clearProducts()
+      dispatch(clearProducts())
     }
   }, [status])
 
