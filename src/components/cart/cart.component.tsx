@@ -9,7 +9,7 @@ import {
   selectProductsTotalPrice
 } from '../../store/reducers/cart/cart.selectors'
 import { useAppSelector } from '../../hooks/redux.hooks'
-import { toggleCart } from '../../store/reducers/cart/cart.actions'
+import { toggleCart } from '../../store/toolkit/cart/cart.slice'
 
 // Components
 import CustomButton from '../custom-button/custum-buttom.component'

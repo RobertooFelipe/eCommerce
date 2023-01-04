@@ -19,7 +19,7 @@ import {
 
 // Utilities
 import Colors from '../../theme/theme.colors'
-import { clearProducts } from '../../store/reducers/cart/cart.actions'
+import { clearCartProducts } from '../../store/toolkit/cart/cart.slice'
 
 const PaymentConfirmationPage: FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ const PaymentConfirmationPage: FunctionComponent = () => {
 
   useEffect(() => {
     if (status === 'true') {
-      dispatch(clearProducts())
+      dispatch(clearCartProducts())
     }
   }, [status])
 

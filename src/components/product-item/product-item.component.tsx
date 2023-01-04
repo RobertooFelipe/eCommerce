@@ -14,7 +14,7 @@ import CustomButton from '../custom-button/custum-buttom.component'
 
 // Utilities
 import Product from '../../types/products.types'
-import { addProductToCart } from '../../store/reducers/cart/cart.actions'
+import { addProductToCart } from '../../store/toolkit/cart/cart.slice'
 
 interface ProductItemProps {
   product: Product
