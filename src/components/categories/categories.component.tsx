@@ -10,7 +10,7 @@ import Loading from '../loading/loading.component'
 import { CategoriesContainer, CategoriesContent } from './categories.styles'
 
 // Utilities
-import { fetchCategories } from '../../store/reducers/category/category.actions'
+import { fetchCategories } from '../../store/toolkit/category/category.slice'
 
 const Categories = () => {
   const { categories, isLoading } = useAppSelector(

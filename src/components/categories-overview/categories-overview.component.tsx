@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 // Utilities
-import { fetchCategories } from '../../store/reducers/category/category.actions'
+import { fetchCategories } from '../../store/toolkit/category/category.slice'
 import { useAppSelector } from '../../hooks/redux.hooks'
 
 // Styles
