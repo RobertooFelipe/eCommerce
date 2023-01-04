@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 // @ts-expect-error
@@ -21,10 +21,10 @@ const persistRootReducer: typeof rootReducer = persistReducer(
   rootReducer
 )
 
-export const store = createStore(
-  persistRootReducer,
-  applyMiddleware(thunk, logger)
-)
+export const store = configureStore({
+  reducer: persistRootReducer,
+  middleware: [thunk, logger]
+})
 
 export const persitedStore = persistStore(store)
 
