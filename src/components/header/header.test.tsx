@@ -1,4 +1,5 @@
 import { renderWithRedux } from '../../helpers/test.helpers'
+import CartProduct from '../../types/cart.types'
 import Header from './header.component'
 
 describe('Header', () => {
@@ -17,5 +18,34 @@ describe('Header', () => {
 
     getByText(/Login/i)
     getByText(/Criar Conta/i)
+  })
+
+  it('should show correct cart products count', () => {
+    const products: CartProduct[] = [
+      {
+        id: '1',
+        imageUrl: 'image_url',
+        name: 'Camisa',
+        price: 100,
+        quantity: 10
+      },
+      {
+        id: '2',
+        imageUrl: 'image_url',
+        name: 'Jaqueta',
+        price: 100,
+        quantity: 12
+      }
+    ]
+
+    const { getByText } = renderWithRedux(<Header />, {
+      preloadedState: {
+        cartReducer: {
+          products
+        }
+      }
+    } as any)
+
+    getByText('22')
   })
 })
