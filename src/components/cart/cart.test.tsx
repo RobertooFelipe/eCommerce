@@ -2,7 +2,7 @@ import { renderWithRedux } from '../../helpers/test.helpers'
 import Cart from './cart.component'
 
 describe('Cart', () => {
-  it('shouldshow correct cart products', () => {
+  it('should show correct cart products', () => {
     const { getByText } = renderWithRedux(<Cart />, {
       preloadedState: {
         cartReducer: {
@@ -23,5 +23,19 @@ describe('Cart', () => {
     getByText('R$100')
     getByText('2')
     getByText('Total: R$200')
+    getByText(/ir para o checkout/i)
+  })
+
+  it('should not show checkout button and should show an empty message if cart is empty', () => {
+    const { getByText, queryByText } = renderWithRedux(<Cart />, {
+      preloadedState: {
+        cartReducer: {
+          products: []
+        }
+      } as any
+    })
+
+    getByText('Ainda não há itens no seu carrinho :(')
+    expect(queryByText(/ir para o checkout/i)).toBeNull()
   })
 })
