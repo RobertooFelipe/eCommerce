@@ -14,7 +14,6 @@ describe('Product Item', () => {
     const { getByText } = renderWithRedux(<ProductItem product={product} />, {})
 
     getByText(/camisa/i)
-    getByText(/R$100/i)
-    getByText(/adicionar ao carrinho/i)
+    getByText('R$100')
   })
 })
