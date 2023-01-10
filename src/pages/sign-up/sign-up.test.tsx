@@ -35,4 +35,23 @@ describe('Sign Up', () => {
 
     await findByText(/Por favor, digite um e-mail válido/i)
   })
+
+  it('should show error when password and password confirmation are different', async () => {
+    const { getByText, findByText, getByPlaceholderText } = renderWithRedux(
+      <SignUpPage />,
+      {}
+    )
+
+    const passwordInput = getByPlaceholderText(/digite sua senha/i)
+    const passwordConfirmationInput = getByPlaceholderText('Confirme sua senha')
+
+    userEvent.type(passwordInput, '123456')
+    userEvent.type(passwordConfirmationInput, '12345678')
+
+    const submitButton = getByText('Criar conta', { selector: 'button' })
+
+    userEvent.click(submitButton)
+
+    await findByText(/As senhas não batem/i)
+  })
 })
