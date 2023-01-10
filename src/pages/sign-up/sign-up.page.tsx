@@ -160,7 +160,7 @@ const SignUpPage = () => {
             />
 
             {errors?.password?.type === 'required' && (
-              <InputErrorMessage>A senha é obrigatório</InputErrorMessage>
+              <InputErrorMessage>A senha é obrigatória</InputErrorMessage>
             )}
             {errors?.password?.type === 'minLength' && (
               <InputErrorMessage>
